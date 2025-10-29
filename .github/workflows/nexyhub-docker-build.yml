@@ -111,13 +111,9 @@ jobs:
 
       - name: Copy compiled app to docker context
         run: |
-          mkdir -p docker/images/n8n/compiled
-          cp -r packages/cli/dist docker/images/n8n/compiled/
-          cp -r packages/cli/templates docker/images/n8n/compiled/
-          cp -r packages/cli/package.json docker/images/n8n/compiled/
-          
-          # Copy node_modules to compiled directory for Docker build
-          cp -r node_modules docker/images/n8n/compiled/
+          # The build script already created the compiled directory with everything
+          # We just need to copy it to the docker build context
+          cp -r compiled docker/images/n8n/
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v6

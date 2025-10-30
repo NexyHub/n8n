@@ -109,17 +109,11 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Copy compiled app to docker context
-        run: |
-          # The build script already created the compiled directory with everything
-          # We just need to copy it to the docker build context
-          cp -r compiled docker/images/n8n/
-
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
-          context: docker/images/n8n
-          file: docker/images/n8n/Dockerfile
+          context: .
+          file: ./docker/images/n8n/Dockerfile
           platforms: ${{ matrix.docker_platform }}
           push: ${{ github.event_name != 'workflow_dispatch' || inputs.push_enabled }}
           tags: ${{ steps.determine-tags.outputs.tags }}

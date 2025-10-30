@@ -3,15 +3,16 @@ name: Build, unit test and lint branch
 on:
   pull_request:
     branches:
-      - '**'
-      - '!release/*'
+      - "**"
+      - "!release/*"
+      - "!nexyhub-branding"
 
 jobs:
   install-and-build:
     name: Install & Build
     runs-on: blacksmith-2vcpu-ubuntu-2204
     env:
-      NODE_OPTIONS: '--max-old-space-size=6144'
+      NODE_OPTIONS: "--max-old-space-size=6144"
     outputs:
       frontend_changed: ${{ steps.paths-filter.outputs.frontend == 'true' }}
       non_python_changed: ${{ steps.paths-filter.outputs.non-python == 'true' }}
@@ -71,7 +72,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
-          node-version: '22.x'
+          node-version: "22.x"
           cache: pnpm
 
       - name: Install dependencies

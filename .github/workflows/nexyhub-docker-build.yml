@@ -77,7 +77,7 @@ jobs:
         id: determine-tags
         run: |
           PLATFORM="${{ matrix.platform }}"
-          SHORT_SHA=$(git rev-parse --short HEAD)
+          SHORT_SHA=$(git rev-parse --short=7 HEAD)
           BRANCH_NAME="nexyhub-branding"
           
           # Base image name
